@@ -1,9 +1,9 @@
 import axios from "axios";
 
 export default {
-    test: function(){
+    harvest: function(query){
         console.log('test in api util hit');
         
-        return axios.get('/api');
+        return axios.post('/api/', query);
     }
 }
