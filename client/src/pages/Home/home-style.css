@@ -1,0 +1,43 @@
+.jumbotron {
+    min-height: 500px;
+    position: relative;
+    text-align: center;
+    opacity: 0;
+    -webkit-transition:opacity .6s;
+        -moz-transition:opacity .6s;
+        -o-transition:opacity .6s;
+        transition: opacity .6s;
+}
+
+.vertical-center {
+
+  display: flex;
+  align-items: center;
+}
+
+
+#enter-btn {
+    opacity: 0;
+    -webkit-transition:opacity .6s;
+        -moz-transition:opacity .6s;
+        -o-transition:opacity .6s;
+        transition: opacity .6s;
+
+    height: 200px;
+    width: 200px;
+    box-shadow: 2px 2px 2px black;    
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+#enter-btn:hover {
+    transform: scale(1.1);  
+    background-color: yellow;
+    color: black;
+}
+
+.loaded {
+    opacity: 1!important;
+}
+
