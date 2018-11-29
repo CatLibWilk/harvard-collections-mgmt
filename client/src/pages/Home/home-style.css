@@ -1,3 +1,8 @@
+a:hover {
+    text-decoration: none;
+    color: black
+}
+
 .jumbotron {
     min-height: 500px;
     position: relative;
@@ -10,7 +15,6 @@
 }
 
 .vertical-center {
-
   display: flex;
   align-items: center;
 }
@@ -18,6 +22,8 @@
 
 #enter-btn {
     opacity: 0;
+    background-color: rgb(187, 187, 255)!important;
+    
     -webkit-transition:opacity .6s;
         -moz-transition:opacity .6s;
         -o-transition:opacity .6s;
@@ -31,6 +37,41 @@
     display: flex;
 }
 
+#section-1 {
+    background-color: peachpuff;
+    height: 100vh;
+    justify-content: center;
+    display: flex;
+  align-items: center;
+
+}
+
+#section-1 p {
+    font-size: 60px;
+    font-family: 'Alfa Slab One', cursive;
+    color: light lightgrey;
+}
+#section-2 {
+    background-color: rgb(255, 231, 210);
+    padding-left: 10%;
+    padding-right: 10%;
+    transform: translate(0px, 100px);
+}
+
+.section {
+
+    padding: 200px 0;
+    min-height: 100%;
+    opacity: 0;
+    
+    transition: all 0.3s ease-out; 
+}
+
+#home-nav {
+    background-color: rgb(250, 186, 131)
+};
+
+
 #enter-btn:hover {
     transform: scale(1.1);  
     background-color: yellow;
@@ -39,5 +80,11 @@
 
 .loaded {
     opacity: 1!important;
+    
+}
+
+.fade-in {
+    opacity: 1;
+    transform: translate(0,0)!important;
 }
 

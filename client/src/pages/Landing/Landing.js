@@ -47,7 +47,7 @@ class Landing extends Component {
                 <div class="row">
                     <div class="col-12 justify-content-center">
                     <Link to={"/home"}>
-                        <div id="enter-btn" class="btn btn-primary mx-auto">Enter</div>
+                        <div id="enter-btn" class="btn mx-auto">Enter</div>
                     </Link>
                     </div>
                 </div>
