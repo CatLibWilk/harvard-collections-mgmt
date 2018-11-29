@@ -29,7 +29,6 @@ class Landing extends Component {
         localStorage.setItem('viewed', 'true')
     };
 
-
     render(){
   
         return(

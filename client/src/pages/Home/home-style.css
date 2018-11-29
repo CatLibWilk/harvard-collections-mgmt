@@ -37,6 +37,10 @@ a:hover {
     display: flex;
 }
 
+#sub-btn {
+    background-color: rgb(245, 140, 49);
+}
+
 #section-1 {
     background-color: peachpuff;
     height: 100vh;
@@ -48,11 +52,19 @@ a:hover {
 
 #section-1 p {
     font-size: 60px;
-    font-family: 'Alfa Slab One', cursive;
+    font-family: 'Raleway', sans-serif;
+
     color: light lightgrey;
 }
 #section-2 {
     background-color: rgb(255, 231, 210);
+    padding-left: 10%;
+    padding-right: 10%;
+    transform: translate(0px, 100px);
+}
+
+#section-3 {
+    background-color: rgb(252, 239, 228);
     padding-left: 10%;
     padding-right: 10%;
     transform: translate(0px, 100px);
