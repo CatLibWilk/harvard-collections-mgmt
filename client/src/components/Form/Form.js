@@ -7,7 +7,7 @@ class Form extends Component{
 
     render(){
         return(
-            <form>
+            <form id='form'>
             <div class="form-group">
                 <label for="exampleFormControlInput1">{this.props.field1_text}</label>
                 <input type="email" class="form-control" id="title_input" onChange={this.props.function} placeholder={this.props.field1_placeholder}></input>

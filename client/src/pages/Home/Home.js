@@ -4,6 +4,7 @@ import MainContainer from "../../components/MainContainer";
 import ScrollDiv from "../../components/ScrollDiv";
 import Form from "../../components/Form";
 import Button from "../../components/Button";
+import API from "../../utils/API";
 
 import ScrollMagic from "scrollmagic";
 
@@ -20,6 +21,10 @@ class Home extends Component {
             subject_input: '',
             medium_input: '',
             date_input: '',
+            returned_data: {
+                count: '',
+                title: ''
+            }
         }
     };
 
@@ -29,26 +34,23 @@ class Home extends Component {
             triggerElement: '#section-1'
         })
           .setClassToggle('#section-1', 'fade-in')
-          .addIndicators()
           .addTo(this.controller);
 
         const section2 = new ScrollMagic.Scene({
             triggerElement: '#section-2'
         })
           .setClassToggle('#section-2', 'fade-in')
-          .addIndicators()
           .addTo(this.controller);
         
         const section3 = new ScrollMagic.Scene({
             triggerElement: '#section-3'
         })
           .setClassToggle('#section-3', 'fade-in')
-          .addIndicators()
           .addTo(this.controller);
     };
 
     handleInput = (e) => {
-        console.log(this.state)
+
         switch (e.target.id) {
             case "title_input":
                 this.setState({title_input: e.target.value})
@@ -70,7 +72,25 @@ class Home extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log('submit clicked');
+        API.harvest(this.state)
+            .then(returned => {
+                if(returned.data.message === "Please fill in atleast one query field."){
+                    alert('Please fill in atleast one query field.')
+                }else{
+                    // console.log(returned.data)
+                    const returnedData = {
+                        count: returned.data.pagination.numFound,
+                        title: returned.data.items.mods[0].titleInfo.title,
+
+                    }
+                    this.setState({returned_data: returnedData})
+                };
+            });
+    };
+
+    handleClear = (e) => {
+        e.preventDefault();
+        document.getElementById('form').reset();
     };
 
 
@@ -105,12 +125,21 @@ class Home extends Component {
 
                         />
                         <Button id={'sub-btn'} width={"12"} text={'Search'} click={this.handleSubmit}/>
+                        <Button id={'clear-btn'} width={"12"} text={'Clear'} click={this.handleClear}/>
                     </ScrollDiv>
 
                     </div>
                     <div className="row">
                         <ScrollDiv id={"section-3"}>
-                            <div>results section</div>
+                            {(this.state.returned_data.title === '' 
+                                ? <div>No data Yet</div> 
+                                : <div>
+                                    <p>Items found in the collection: {this.state.returned_data.count}</p>
+                                    <p>First Title Returned: {this.state.returned_data.title}</p>
+
+                                  </div>
+                            )}
+
                         </ScrollDiv>
                     </div>
                 </MainContainer>

@@ -41,6 +41,10 @@ a:hover {
     background-color: rgb(245, 140, 49);
 }
 
+#clear-btn {
+    background-color: rgb(255, 168, 92);
+}
+
 #section-1 {
     background-color: peachpuff;
     height: 100vh;
