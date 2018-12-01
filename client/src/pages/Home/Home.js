@@ -4,7 +4,9 @@ import MainContainer from "../../components/MainContainer";
 import ScrollDiv from "../../components/ScrollDiv";
 import Form from "../../components/Form";
 import Button from "../../components/Button";
+
 import API from "../../utils/API";
+import Logic from "../../utils/Logic";
 
 import ScrollMagic from "scrollmagic";
 
@@ -23,7 +25,7 @@ class Home extends Component {
             date_input: '',
             returned_data: {
                 count: '',
-                title: ''
+                titles: []
             }
         }
     };
@@ -78,12 +80,17 @@ class Home extends Component {
                     alert('Please fill in atleast one query field.')
                 }else{
                     // console.log(returned.data)
-                    const returnedData = {
-                        count: returned.data.pagination.numFound,
-                        title: returned.data.items.mods[0].titleInfo.title,
+                    Logic.getTitles(returned.data)
+                            .then(response => {
+                                console.log(response)
+                                const returnedData = {
+                                    count: returned.data.pagination.numFound,
+                                    titles: response
+                                };
+                            
+                            this.setState({returned_data: returnedData})
 
-                    }
-                    this.setState({returned_data: returnedData})
+                            });  
                 };
             });
     };
@@ -131,11 +138,17 @@ class Home extends Component {
                     </div>
                     <div className="row">
                         <ScrollDiv id={"section-3"}>
-                            {(this.state.returned_data.title === '' 
+                            {(!this.state.returned_data.titles[0] 
                                 ? <div>No data Yet</div> 
                                 : <div>
-                                    <p>Items found in the collection: {this.state.returned_data.count}</p>
-                                    <p>First Title Returned: {this.state.returned_data.title}</p>
+                                    <h2>Items found in the collection: {this.state.returned_data.count}</h2>
+                                    {this.state.returned_data.titles.map(title => {
+                                        console.log(title)
+                                        return(
+                                            <p>{title}</p>
+                                        )
+                                        
+                                    })}
 
                                   </div>
                             )}
