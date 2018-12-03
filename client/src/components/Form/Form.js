@@ -33,11 +33,11 @@ class Form extends Component{
             <div class="form-group">
                 <label for="exampleFormControlSelect2">{this.props.field4_text}</label>
                 <select multiple class="form-control" id="date_input" onChange={this.props.function}>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                <option value={5}>Last 5 years</option>
+                <option value={10}>Last 10 years</option>
+                <option value={15}>Last 15 years</option>
+                <option value={20}>Last 20 years</option>
+                <option value={25}>Last 25 years</option>
                 </select>
             </div>
             </form>

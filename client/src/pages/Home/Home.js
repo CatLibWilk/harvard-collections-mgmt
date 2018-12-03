@@ -74,26 +74,37 @@ class Home extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        API.harvest(this.state)
+
+            API.harvest(this.state)
             .then(returned => {
                 if(returned.data.message === "Please fill in atleast one query field."){
                     alert('Please fill in atleast one query field.')
                 }else{
-                    // console.log(returned.data)
-                    Logic.getTitles(returned.data)
-                            .then(response => {
-                                console.log(response)
-                                const returnedData = {
-                                    count: returned.data.pagination.numFound,
-                                    titles: response
-                                };
+                    if(this.state.date_input){
+                        console.log('dates search home.js')
+                        Logic.dateSort(returned.data)
+                                // .then(returned => {
+                                //     console.log(returned)
+                                // })
+                    }else{
+                        console.log('no date facet home.js')
+                        Logic.getTitles(returned.data)
+                        .then(response => {
+                            console.log(response)
+                            const returnedData = {
+                                count: returned.data.pagination.numFound,
+                                titles: response
+                            };
                             
                             this.setState({returned_data: returnedData})
-
-                            });  
+                            
+                        });  
+                    }
+                    
                 };
             });
-    };
+        };
+    
 
     handleClear = (e) => {
         e.preventDefault();
