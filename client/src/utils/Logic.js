@@ -16,25 +16,48 @@ export default {
 
     dateSort: function(datesArr){
         console.log(`uptop datesArr`)
-        console.log(datesArr)
+        console.log(datesArr.items.mods)
      
         const dates = []
         datesArr.items.mods.map(item => {
-        
-                if(item.originInfo.dateIssued){
-                    if(typeof(item.originInfo.dateIssued) === 'object'){
-                        const str = item.originInfo.dateIssued[0].toString();
-                        const stripped = str.replace(/\D/g,'');
-                        console.log(stripped)
-                    }
-                    if(typeof(item.originInfo.dateIssued) === 'string'){
-                        dates.push(item.originInfo.dateIssued)
-                    }
-                }
-            })
-            console.log(dates)
 
-        
+                if(item.originInfo.dateIssued){
+                    console.log(item.originInfo.dateIssued)
+                    console.log(typeof(item.originInfo.dateIssued))
+                    if(typeof(item.originInfo.dateIssued) == 'string'){
+                        const stripped = item.originInfo.dateIssued.replace(/\D/g,'');
+                        const limited = stripped.slice(0,4)
+                        const newItem = {'data': item, 'sort-date': limited}
+                        dates.push(newItem)
+                    }
+
+                    if(typeof(item.originInfo.dateIssued) == 'object'){
+                        console.log('complex standard date')
+
+                            let sort_date
+                            if(typeof(item.originInfo.dateIssued[0]) == 'string'){
+                                console.log(item.originInfo.dateIssued[0])
+                                const stripped = item.originInfo.dateIssued[0].replace(/\D/g,'');
+                                const limited = stripped.slice(0,4)
+                            
+                                sort_date = limited
+                            }else{
+                                console.log('non-string complex')
+                                sort_date = item.originInfo.dateIssued[0];
+
+                            }
+                            const newItem = {'data': item, 'sort-date': sort_date}
+                            dates.push(newItem)
+
+                    }
+                }else{
+                    console.log('non-standard date info')
+                    console.log(item)
+                }
+            }
+        )
+           console.log(dates)
+            
         const sorted = [];
         const promise = new Promise(function(res, rej) {
             
@@ -45,4 +68,3 @@ export default {
 }
 
 
-  
