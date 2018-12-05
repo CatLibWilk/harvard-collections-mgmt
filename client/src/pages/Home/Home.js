@@ -83,9 +83,9 @@ class Home extends Component {
                     if(this.state.date_input){
                         console.log('dates search home.js')
                         Logic.dateSort(returned.data, this.state.date_input)
-                                // .then(returned => {
-                                //     console.log(returned)
-                                // })
+                                .then(returned => {
+                                    console.log(returned)
+                                })
                     }else{
                         console.log('no date facet home.js')
                         Logic.getTitles(returned.data)
