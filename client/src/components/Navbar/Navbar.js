@@ -4,8 +4,8 @@ import React from "react";
 const Navbar = (props) => {
     return (
 
-        <nav id={props.id} class="navbar navbar-light">
-        <a class="navbar-brand">CloudManager</a>
+        <nav id={props.id} className="navbar navbar-light">
+        <a className="navbar-brand">CloudManager</a>
     </nav>
     );
 };

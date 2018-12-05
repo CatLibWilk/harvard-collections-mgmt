@@ -32,21 +32,21 @@ class Landing extends Component {
     render(){
   
         return(
-            <div class="container-fluid">
-                <div class="row">
-                <div class="col-10 col-md-12">
-                    <div class="jumbotron jumbotron-fluid vertical-center">
-                        <div class="container">
-                            <h1 class="display-4">CloudManager+</h1>
-                            <p class="lead">Collections Management Tool utilizing Harvard LibraryCloud API.</p>
+            <div className="container-fluid">
+                <div className="row">
+                <div className="col-10 col-md-12">
+                    <div className="jumbotron jumbotron-fluid vertical-center">
+                        <div className="container">
+                            <h1 className="display-4">CloudManager+</h1>
+                            <p className="lead">Collections Management Tool utilizing Harvard LibraryCloud API.</p>
                         </div>
                     </div>
                 </div>
                 </div>
-                <div class="row">
-                    <div class="col-12 justify-content-center">
+                <div className="row">
+                    <div className="col-12 justify-content-center">
                     <Link to={"/home"}>
-                        <div id="enter-btn" class="btn mx-auto">Enter</div>
+                        <div id="enter-btn" className="btn mx-auto">Enter</div>
                     </Link>
                     </div>
                 </div>

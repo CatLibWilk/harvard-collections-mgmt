@@ -82,7 +82,7 @@ class Home extends Component {
                 }else{
                     if(this.state.date_input){
                         console.log('dates search home.js')
-                        Logic.dateSort(returned.data)
+                        Logic.dateSort(returned.data, this.state.date_input)
                                 // .then(returned => {
                                 //     console.log(returned)
                                 // })

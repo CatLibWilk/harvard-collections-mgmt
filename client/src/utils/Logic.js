@@ -16,14 +16,17 @@ export default {
         return promise
     },
 
-    dateSort: function(datesArr){
+    dateSort: function(datesArr, input_range){
         console.log(`uptop datesArr`)
         console.log(datesArr.items.mods)
-     
+        
+        const range = input_range;
         const dates = []
         let newItem
         let sort_date
-
+        
+        console.log(range)
+        
         datesArr.items.mods.map(item => {
 
                 if(item.originInfo.dateIssued){
@@ -34,7 +37,7 @@ export default {
                     if(typeof(item.originInfo.dateIssued) == 'string'){
                         const stripped = item.originInfo.dateIssued.replace(/\D/g,'');
                         const limited = parseInt(stripped.slice(0,4))
-                        const newItem = {'data': item, 'sort-date': limited}
+                        const newItem = {'data': item, 'sort_date': limited}
                         dates.push(newItem)
                     }
 
@@ -53,7 +56,7 @@ export default {
                                 sort_date = parseInt(item.originInfo.dateIssued[0]);
 
                             }
-                            newItem = {'data': item, 'sort-date': sort_date}
+                            newItem = {'data': item, 'sort_date': sort_date}
                             dates.push(newItem)
 
                     }
@@ -70,22 +73,32 @@ export default {
                         console.log(item.originInfo[0].dateIssued[0]['#text'])
                        sort_date = parseInt(item.originInfo[0].dateIssued[0]['#text'])
                     }
-                        newItem = {'data': item, 'sort-date': sort_date};
+                        newItem = {'data': item, 'sort_date': sort_date};
                         dates.push(newItem)
                 }
             }
         )
-           console.log(dates)
-           
+            console.log(dates)
+           this.sortFunction(dates, range)
+                .then(result => {
+                    console.log(result)
+                })
         const sorted = [];
-        const promise = new Promise(function(res, rej) {
-            
-        })
-
-        return promise;
+        
     },
 
-   
+   sortFunction: function(dates, range){
+       return new Promise(function(res, rej){
+        
+        const limiter = (new Date().getFullYear())-range
+        console.log(limiter)
+        const limitedArray =
+        dates.filter(item => item.sort_date > limiter ? true : false
+        )
+        res(limitedArray)
+
+       })
+   }
 }
 
 
