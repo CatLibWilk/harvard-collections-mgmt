@@ -25,8 +25,9 @@ class Home extends Component {
             date_input: '',
             returned_data: {
                 count: '',
-                titles: []
+                items: []
             }
+            
         }
     };
 
@@ -88,12 +89,12 @@ class Home extends Component {
                                 })
                     }else{
                         console.log('no date facet home.js')
-                        Logic.getTitles(returned.data)
+                        Logic.getBasicBib(returned.data)
                         .then(response => {
                             console.log(response)
                             const returnedData = {
                                 count: returned.data.pagination.numFound,
-                                titles: response
+                                items: response
                             };
                             
                             this.setState({returned_data: returnedData})
@@ -149,19 +150,19 @@ class Home extends Component {
                     </div>
                     <div className="row">
                         <ScrollDiv id={"section-3"}>
-                            {(!this.state.returned_data.titles[0] 
+                            {(!this.state.returned_data.items[0] 
                                 ? <div>No data Yet</div> 
                                 : <div>
-                                    <h2>Items found in the collection: {this.state.returned_data.count}</h2>
-                                    {this.state.returned_data.titles.map(title => {
-                                        console.log(title)
+                                    <h2>Total Items found in the collection: {this.state.returned_data.count}</h2>
+                                    {this.state.returned_data.items.map(item => {
+                                        console.log(item)
                                         return(
-                                            <p>{title}</p>
+                                            <p>{}</p>
                                         )
                                         
                                     })}
-
                                   </div>
+                             
                             )}
 
                         </ScrollDiv>
