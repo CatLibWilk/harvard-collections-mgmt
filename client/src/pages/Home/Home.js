@@ -157,7 +157,7 @@ class Home extends Component {
                                     {this.state.returned_data.items.map(item => {
                                         console.log(item)
                                         return(
-                                            <p>{}</p>
+                                            <p>{`${item.author}, ${item.title}, ${item.pubDate}`}</p>
                                         )
                                         
                                     })}

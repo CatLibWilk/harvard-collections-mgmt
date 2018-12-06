@@ -2,8 +2,11 @@ import { OutgoingMessage } from "http";
 
 export default {
     getBasicBib: function(titlesArr){
+        console.log(titlesArr)
         const processedItems = [];
         let sort_date
+        let retrievedTitle = ''
+
         const promise = new Promise(function(res, rej) {
             const items = titlesArr.items.mods
             items.forEach(item => {
@@ -13,12 +16,45 @@ export default {
                     pubDate: '',
                     raw: item
                 }
+                ///title retrieve
                 if(item.titleInfo.title){
-                    newItem.title = item.titleInfo.title
+                        retrievedTitle = item.titleInfo.title
+                        
+                    }else{
+                        retrievedTitle = item.titleInfo[0].title
+                        
+                    }
+                
+                if(retrievedTitle.length<100){
+                    newItem.title = retrievedTitle
+                }else{
+                    newItem.title = `${retrievedTitle.slice(0,101)}...`
                 }
 
+                //author retrieve
+                if(item.name){
+                    console.log(item)
+                    console.log(`item.name is a ${typeof(item.name)}`)
+                    console.log(item.name.length)
+                    if(item.name.length > 1) {
+                        console.log(item.name[0])
+                        if(typeof(item.name[0].namePart) == 'string'){
+                            newItem.author = item.name[0].namePart
+                        }else{
+                            newItem.author = item.name[0].namePart[0]
+                        }
+                    }else{
+                        newItem.author = item.name.namePart[0];
+                    }
+                    }
 
-                    if(item.originInfo.dateIssued){
+               
+                
+                
+                
+
+                ///date retrieve
+                if(item.originInfo.dateIssued){
                         
                         console.log(item.originInfo.dateIssued)
                         console.log(typeof(item.originInfo.dateIssued))
@@ -44,7 +80,6 @@ export default {
                                     sort_date = parseInt(item.originInfo.dateIssued[0]);
 
                                 }
-                                
                                 newItem.pubDate = sort_date;
 
                         }
@@ -66,6 +101,7 @@ export default {
                             newItem.pubDate = sort_date
                     }
                     processedItems.push(newItem)
+
             })
             res(processedItems)
         })
