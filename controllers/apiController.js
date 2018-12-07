@@ -1,5 +1,5 @@
 const axios = require("axios");
-const baseUrl = 'http://api.lib.harvard.edu/v2/items.json?';
+const baseUrl = 'http://api.lib.harvard.edu/v2/items.json?limit=250&';
 
 
 module.exports = {
@@ -47,9 +47,3 @@ module.exports = {
         }
 }
 
-//query headers for different fields
-// title=
-// name=
-// subject=
-// originDate=
-// cant search by physical description for medium so will have to get data and sort on server-setImmediate

@@ -1,3 +1,7 @@
+body {
+    /* min-height: 3000px */
+}
+
 a:hover {
     text-decoration: none;
     color: black
@@ -20,22 +24,7 @@ a:hover {
 }
 
 
-#enter-btn {
-    opacity: 0;
-    background-color: rgb(187, 187, 255)!important;
-    
-    -webkit-transition:opacity .6s;
-        -moz-transition:opacity .6s;
-        -o-transition:opacity .6s;
-        transition: opacity .6s;
 
-    height: 200px;
-    width: 200px;
-    box-shadow: 2px 2px 2px black;    
-    align-items: center;
-    justify-content: center;
-    display: flex;
-}
 
 #sub-btn {
     background-color: rgb(245, 140, 49);
@@ -71,6 +60,14 @@ a:hover {
     background-color: rgb(252, 239, 228);
     padding-left: 10%;
     padding-right: 10%;
+    transform: translate(0px, 100px);
+}
+
+#section-4 {
+    background-color: rgb(250, 148, 65);
+    padding-left: 10%;
+    padding-right: 10%;
+    height: 100vh;
     transform: translate(0px, 100px);
 }
 

@@ -50,6 +50,12 @@ class Home extends Component {
         })
           .setClassToggle('#section-3', 'fade-in')
           .addTo(this.controller);
+        
+        const section4 = new ScrollMagic.Scene({
+            triggerElement: '#section-4'
+        })
+          .setClassToggle('#section-4', 'fade-in')
+          .addTo(this.controller);
     };
 
     handleInput = (e) => {
@@ -126,6 +132,18 @@ class Home extends Component {
 
     handleClear = (e) => {
         e.preventDefault();
+        const stateReset = {
+            title_input: '',
+            author_input: '',
+            subject_input: '',
+            medium_input: '',
+            date_input: '',
+            returned_data: {
+                count: '',
+                items: []
+            }
+        }
+        this.setState(stateReset)
         document.getElementById('form').reset();
     };
 
@@ -184,6 +202,7 @@ class Home extends Component {
                             )}
 
                         </ScrollDiv>
+                        <ScrollDiv id={"section-4"}><div>Charts To Go Here</div></ScrollDiv>
                     </div>
                 </MainContainer>
             </div>
