@@ -8,7 +8,13 @@ export default {
         let retrievedTitle = ''
 
         const promise = new Promise(function(res, rej) {
-            const items = titlesArr.items.mods
+            let items
+            if(titlesArr.items){
+                 items = titlesArr.items.mods
+            }else{
+                 items = titlesArr
+            }
+
             items.forEach(item => {
                 const newItem = {
                     title: '',

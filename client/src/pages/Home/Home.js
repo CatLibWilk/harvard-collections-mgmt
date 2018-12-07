@@ -86,6 +86,23 @@ class Home extends Component {
                         Logic.dateSort(returned.data, this.state.date_input)
                                 .then(returned => {
                                     console.log(returned)
+                                    const passToFormat = []
+                                    returned.map(item => {
+                                        passToFormat.push(item.data)
+                                    })
+                                    console.log(passToFormat)
+                                    Logic.getBasicBib(passToFormat)
+                                          .then(returned => {
+                                              console.log(returned)
+                                              const returnedData = {
+                                                count: returned.length,
+                                                items: returned
+                                            };
+                                            
+                                            this.setState({returned_data: returnedData})
+
+                                          })
+                                    
                                 })
                     }else{
                         console.log('no date facet home.js')
@@ -157,7 +174,8 @@ class Home extends Component {
                                     {this.state.returned_data.items.map(item => {
                                         console.log(item)
                                         return(
-                                            <p>{`${item.author}, ${item.title}, ${item.pubDate}`}</p>
+                                            (item.author ? <p>{`${item.author}, ${item.title}, ${item.pubDate}`}</p> :
+                                            <p>{`${item.title}, ${item.pubDate}`}</p>)
                                         )
                                         
                                     })}
