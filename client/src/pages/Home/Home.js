@@ -10,6 +10,8 @@ import Logic from "../../utils/Logic";
 
 import ScrollMagic from "scrollmagic";
 
+import Chart from "chart.js"
+
 import home_style from "./home-style.css";
 
 class Home extends Component {
@@ -26,12 +28,15 @@ class Home extends Component {
             returned_data: {
                 count: '',
                 items: []
-            }
+            },
+            chart_percentage: 0
             
         }
     };
 
     componentDidMount(){
+
+        // this.buildChart();
 
         const section1 = new ScrollMagic.Scene({
             triggerElement: '#section-1'
@@ -56,6 +61,7 @@ class Home extends Component {
         })
           .setClassToggle('#section-4', 'fade-in')
           .addTo(this.controller);
+        
     };
 
     handleInput = (e) => {
@@ -106,6 +112,7 @@ class Home extends Component {
                                             };
                                             
                                             this.setState({returned_data: returnedData})
+                                            this.buildChart();
 
                                           })
                                     
@@ -121,13 +128,14 @@ class Home extends Component {
                             };
                             
                             this.setState({returned_data: returnedData})
+                            this.buildChart();
                             
                         });  
                     }
                     
                 };
             });
-        };
+    };
     
 
     handleClear = (e) => {
@@ -145,6 +153,49 @@ class Home extends Component {
         }
         this.setState(stateReset)
         document.getElementById('form').reset();
+        document.getElementById('section-4').innerHTML = '';
+
+    };
+
+    buildChart = () => {
+        const total = 15930353
+        const returnValue = this.state.returned_data.count
+        const label = `Query`
+        const percentage = returnValue/total
+        const perc = (percentage.toFixed(4))*100
+
+        this.setState({chart_percentage: perc})
+
+
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: [`Total Collection`, `${label}`],
+                datasets: [{
+                    label: '% of collection',
+                    data: [`${total}`, `${returnValue}`],
+                    backgroundColor: [
+                        'rgba(255, 168, 92, 1)',
+                        'rgba(255, 218, 185, 1)',
+                        
+                    ],
+                    borderColor: [
+                        'rgba(255, 218, 185, 1)',
+                        'rgba(255, 218, 185, 1)',
+                        
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                animation: {
+                    animateRotate:true
+                }
+            }
+            
+        })
+    
     };
 
 
@@ -202,7 +253,11 @@ class Home extends Component {
                             )}
 
                         </ScrollDiv>
-                        <ScrollDiv id={"section-4"}><div>Charts To Go Here</div></ScrollDiv>
+                        <ScrollDiv id={"section-4"}>
+                                {this.state.chart_percentage > 0 ? <h1>Items matching your query make up {this.state.chart_percentage}% of the collection</h1> : <div></div>}
+                                <canvas id="myChart"></canvas>
+
+                        </ScrollDiv>
                     </div>
                 </MainContainer>
             </div>

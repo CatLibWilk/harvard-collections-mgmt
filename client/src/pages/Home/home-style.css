@@ -35,7 +35,7 @@ a:hover {
 }
 
 #section-1 {
-    background-color: peachpuff;
+    background-color: rgb(255, 218, 185);
     height: 100vh;
     justify-content: center;
     display: flex;
@@ -64,7 +64,7 @@ a:hover {
 }
 
 #section-4 {
-    background-color: rgb(250, 148, 65);
+    background-color: rgb(253, 249, 245);
     padding-left: 10%;
     padding-right: 10%;
     height: 100vh;
