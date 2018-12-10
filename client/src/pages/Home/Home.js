@@ -111,8 +111,9 @@ class Home extends Component {
                                                 items: returned
                                             };
                                             
-                                            this.setState({returned_data: returnedData})
+                                            this.setState({returned_data: returnedData});
                                             this.buildChart();
+                                            this.scrollTo();
 
                                           })
                                     
@@ -129,6 +130,7 @@ class Home extends Component {
                             
                             this.setState({returned_data: returnedData})
                             this.buildChart();
+                            this.scrollTo();
                             
                         });  
                     }
@@ -154,6 +156,11 @@ class Home extends Component {
         this.setState(stateReset)
         document.getElementById('form').reset();
         document.getElementById('section-4').innerHTML = '';
+        const form = document.querySelector('#section-2').getBoundingClientRect();
+        console.log(form.y)
+        window.scrollTo({top: form.y+1100, behavior: 'smooth'});
+        
+        
 
     };
 
@@ -198,6 +205,12 @@ class Home extends Component {
     
     };
 
+    scrollTo = () => {
+        const results = document.querySelector("#section-3").getBoundingClientRect();
+        console.log(results.y)
+            window.scrollTo({top: (results.y + 750), behavior: 'smooth'})
+
+    }
 
     render(){
   
