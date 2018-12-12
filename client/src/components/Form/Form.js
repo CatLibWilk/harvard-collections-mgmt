@@ -23,11 +23,12 @@ class Form extends Component{
             <div className="form-group">
                 <label htmlFor="exampleFormControlSelect1">{this.props.field3_text}</label>
                 <select className="form-control" id="medium_input" onChange={this.props.function}>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                <option value={''}>no medium specified</option>
+                <option value={'fiction'}>Fiction</option>
+                <option value={'nonfiction'}>Non-Fiction</option>
+                {/* <option>3</option> */}
+                {/* <option>4</option> */}
+                {/* <option>5</option> */}
                 </select>
             </div>
             <div className="form-group">

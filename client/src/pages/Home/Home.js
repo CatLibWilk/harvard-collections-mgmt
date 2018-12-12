@@ -65,7 +65,6 @@ class Home extends Component {
     };
 
     handleInput = (e) => {
-
         switch (e.target.id) {
             case "title_input":
                 this.setState({title_input: e.target.value})
@@ -157,8 +156,16 @@ class Home extends Component {
         document.getElementById('form').reset();
         document.getElementById('section-4').innerHTML = '';
         const form = document.querySelector('#section-2').getBoundingClientRect();
-        console.log(form.y)
         window.scrollTo({top: form.y+1100, behavior: 'smooth'});
+        
+        const newCanvas = document.createElement('canvas');
+        const para = document.createElement('p');
+        
+    
+        newCanvas.setAttribute('id', 'myChart')
+        document.getElementById('section-4').appendChild(newCanvas);
+
+
         
         
 
@@ -169,7 +176,9 @@ class Home extends Component {
         const returnValue = this.state.returned_data.count
         const label = `Query`
         const percentage = returnValue/total
-        const perc = (percentage.toFixed(4))*100
+        const perc = ((percentage.toFixed(4))*100)
+
+        console.log(perc)
 
         this.setState({chart_percentage: perc})
 

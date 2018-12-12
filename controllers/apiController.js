@@ -10,14 +10,16 @@ module.exports = {
         const queryTitle = req.body.title_input;
         const queryName = req.body.author_input;
         const querySubject = req.body.subject_input;
+        const queryMedium = req.body.medium_input;
         
         let title = '*';
         let name = '*';
         let subject = '*';
+        let genre = '*';
 
         
 
-        if(queryTitle==='' && queryName==='' && querySubject===''){
+        if(queryTitle==='' && queryName==='' && querySubject==='' && queryMedium ===''){
             res.json({message: 'Please fill in atleast one query field.'});
 
             }else{
@@ -32,9 +34,13 @@ module.exports = {
                 if(querySubject !== ''){
                     subject = querySubject;
                 };
+
+                if(queryMedium !== ''){
+                    genre = queryMedium;
+                }
                 
                 
-                const queryString = `${baseUrl}title=${title}&name=${name}&subject=${subject}`
+                const queryString = `${baseUrl}title=${title}&name=${name}&subject=${subject}&genre=${genre}`
                 
                 console.log(`sending query url: ${queryString}`)
                 axios.get(queryString)
