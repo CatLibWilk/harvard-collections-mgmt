@@ -111,7 +111,6 @@ class Home extends Component {
                                             };
                                             
                                             this.setState({returned_data: returnedData});
-                                            this.buildChart();
                                             this.scrollTo();
 
                                           })
@@ -154,16 +153,11 @@ class Home extends Component {
         }
         this.setState(stateReset)
         document.getElementById('form').reset();
-        document.getElementById('section-4').innerHTML = '';
         const form = document.querySelector('#section-2').getBoundingClientRect();
         window.scrollTo({top: form.y+1100, behavior: 'smooth'});
         
-        const newCanvas = document.createElement('canvas');
-        const para = document.createElement('p');
-        
-    
-        newCanvas.setAttribute('id', 'myChart')
-        document.getElementById('section-4').appendChild(newCanvas);
+        const tar = document.getElementById('wrapper')
+        tar.classList.add('hide')
 
 
         
@@ -172,13 +166,24 @@ class Home extends Component {
     };
 
     buildChart = () => {
+        if(document.getElementById('wrapper').classList.contains('hide')){
+            document.getElementById('wrapper').classList.remove('hide')
+        }
+
         const total = 15930353
         const returnValue = this.state.returned_data.count
         const label = `Query`
         const percentage = returnValue/total
-        const perc = ((percentage.toFixed(4))*100)
+       
+        const prePerc = (percentage*100).toFixed(2)
 
-        console.log(perc)
+        let perc
+
+        if(prePerc[prePerc.length-1] === "0"){
+            perc = prePerc.slice(0, prePerc.length-1)
+        }else{
+            perc = prePerc
+        }
 
         this.setState({chart_percentage: perc})
 
@@ -190,7 +195,7 @@ class Home extends Component {
                 labels: [`Total Collection`, `${label}`],
                 datasets: [{
                     label: '% of collection',
-                    data: [`${total}`, `${returnValue}`],
+                    data: [`${total-returnValue}`, `${returnValue}`],
                     backgroundColor: [
                         'rgba(255, 168, 92, 1)',
                         'rgba(255, 218, 185, 1)',
@@ -222,7 +227,7 @@ class Home extends Component {
     }
 
     render(){
-  
+       
         return(
             <div>
                 <Navbar id="home-nav"/>
@@ -276,8 +281,10 @@ class Home extends Component {
 
                         </ScrollDiv>
                         <ScrollDiv id={"section-4"}>
-                                {this.state.chart_percentage > 0 ? <h1>Items matching your query make up {this.state.chart_percentage}% of the collection</h1> : <div></div>}
-                                <canvas id="myChart"></canvas>
+                                <div id="wrapper">
+                                    {this.state.chart_percentage > 0 ? <h1>Items matching your query make up {this.state.chart_percentage}% of the collection</h1> : <div></div>}
+                                    <canvas id="myChart"></canvas>
+                                </div>
 
                         </ScrollDiv>
                     </div>
