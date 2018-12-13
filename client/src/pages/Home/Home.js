@@ -252,9 +252,14 @@ class Home extends Component {
 
                             field3_text={"Medium"}
                                 field3_id={'medium_input'}
+                                dropdown_options={[
+                                    {value:'fiction', text:'Fiction'},
+                                    {value:'nonfiction', text:'Non-Fiction'}
+                                ]}
 
                             field4_text={"Date Range"}
                                 field4_id={'date_input'}
+                                optionList_options={[{value:5, text:'Last 5 Years'}, {value:10, text:'Last 10 Years'}, {value:15, text:'Last 15 Years'}, {value:20, text:'Last 20 Years'}, {value:25, text:'Last 25 Years'}]}
 
                             field5_text={"Subject"}
                                 field5_placeholder={"Library Sciences"}
