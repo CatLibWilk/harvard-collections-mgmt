@@ -192,7 +192,7 @@ class Home extends Component {
         const myChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: [`Total Collection`, `${label}`],
+                labels: [`Other`, `${label}`],
                 datasets: [{
                     label: '% of collection',
                     data: [`${total-returnValue}`, `${returnValue}`],

@@ -94,14 +94,21 @@ export default {
                         console.log('non-standard date info')
                         console.log(item)
                         console.log(item.originInfo)
-                        if(item.originInfo[0].dateIssued['#text']){
-                            console.log('nested marc info date')
-                            
-                            console.log(item.originInfo[0].dateIssued['#text'])
-                            sort_date = parseInt(item.originInfo[0].dateIssued['#text'])
+                        if(item.originInfo[0]){
+
+                            if(item.originInfo[0].dateIssued['#text']){
+                                console.log('nested marc info date')
+                                
+                                console.log(item.originInfo[0].dateIssued['#text'])
+                                sort_date = parseInt(item.originInfo[0].dateIssued['#text'])
+                            }else{
+                                console.log(item.originInfo[0].dateIssued[0]['#text'])
+                                sort_date = parseInt(item.originInfo[0].dateIssued[0]['#text'])
+                            }
                         }else{
-                            console.log(item.originInfo[0].dateIssued[0]['#text'])
-                        sort_date = parseInt(item.originInfo[0].dateIssued[0]['#text'])
+                           if(item.originInfo.dateCreated){
+                               sort_date = parseInt(item.originInfo.dateCreated[0]['#text'])
+                           }
                         }
                             
                             newItem.pubDate = sort_date
@@ -162,14 +169,19 @@ export default {
                         console.log('non-standard date info')
                         console.log(item)
                         console.log(item.originInfo)
-                        if(item.originInfo[0].dateIssued['#text']){
-                            console.log('nested marc info date')
-                            
-                            console.log(item.originInfo[0].dateIssued['#text'])
-                            sort_date = parseInt(item.originInfo[0].dateIssued['#text'])
+                        if(item.originInfo[0]){
+
+                            if(item.originInfo[0].dateIssued['#text']){
+                                console.log('nested marc info date')
+                                
+                                console.log(item.originInfo[0].dateIssued['#text'])
+                                sort_date = parseInt(item.originInfo[0].dateIssued['#text'])
+                            }else{
+                                console.log(item.originInfo[0].dateIssued[0]['#text'])
+                                sort_date = parseInt(item.originInfo[0].dateIssued[0]['#text'])
+                            }
                         }else{
-                            console.log(item.originInfo[0].dateIssued[0]['#text'])
-                        sort_date = parseInt(item.originInfo[0].dateIssued[0]['#text'])
+                            sort_date = parseInt(item.originInfo.dateCreated[0]['#text'])
                         }
                             newItem = {'data': item, 'sort_date': sort_date};
                             dates.push(newItem)
