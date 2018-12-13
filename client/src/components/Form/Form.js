@@ -10,19 +10,19 @@ class Form extends Component{
             <form id='form'>
             <div className="form-group">
                 <label htmlFor="exampleFormControlInput1">{this.props.field1_text}</label>
-                <input type="email" className="form-control" id="title_input" onChange={this.props.function} placeholder={this.props.field1_placeholder}></input>
+                <input type="email" className="form-control" id={this.props.field1_id} onChange={this.props.function} placeholder={this.props.field1_placeholder}></input>
             </div>
             <div className="form-group">
                 <label htmlFor="exampleFormControlInput1">{this.props.field2_text}</label>
-                <input type="email" className="form-control" id="author_input" onChange={this.props.function} placeholder={this.props.field2_placeholder}></input>
+                <input type="email" className="form-control" id={this.props.field2_id} onChange={this.props.function} placeholder={this.props.field2_placeholder}></input>
             </div>
             <div className="form-group">
                 <label htmlFor="exampleFormControlInput1">{this.props.field5_text}</label>
-                <input type="email" className="form-control" id="subject_input" onChange={this.props.function} placeholder={this.props.field5_placeholder}></input>
+                <input type="email" className="form-control" id={this.props.field5_id} onChange={this.props.function} placeholder={this.props.field5_placeholder}></input>
             </div>
             <div className="form-group">
                 <label htmlFor="exampleFormControlSelect1">{this.props.field3_text}</label>
-                <select className="form-control" id="medium_input" onChange={this.props.function}>
+                <select className="form-control" id={this.props.field3_id} onChange={this.props.function}>
                 <option value={''}>no medium specified</option>
                 <option value={'fiction'}>Fiction</option>
                 <option value={'nonfiction'}>Non-Fiction</option>
@@ -33,7 +33,7 @@ class Form extends Component{
             </div>
             <div className="form-group">
                 <label htmlFor="exampleFormControlSelect2">{this.props.field4_text}</label>
-                <select multiple className="form-control" id="date_input" onChange={this.props.function}>
+                <select multiple className="form-control" id={this.props.field4_id} onChange={this.props.function}>
                 <option value={5}>Last 5 years</option>
                 <option value={10}>Last 10 years</option>
                 <option value={15}>Last 15 years</option>

@@ -245,15 +245,20 @@ class Home extends Component {
                         <Form function={this.handleInput}
                             field1_text={"Title Query"}
                                 field1_placeholder={"Introduction to Cataloging and Classification"}
+                                field1_id={'title_input'}
 
                             field2_text={"Author"}
+                                field2_id={'author_input'}
 
                             field3_text={"Medium"}
+                                field3_id={'medium_input'}
 
                             field4_text={"Date Range"}
+                                field4_id={'date_input'}
 
                             field5_text={"Subject"}
                                 field5_placeholder={"Library Sciences"}
+                                field5_id={'subject_input'}
 
                         />
                         <Button id={'sub-btn'} width={"12"} text={'Search'} click={this.handleSubmit}/>
