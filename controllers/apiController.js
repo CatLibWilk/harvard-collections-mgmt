@@ -1,5 +1,5 @@
 const axios = require("axios");
-const baseUrl = 'http://api.lib.harvard.edu/v2/items.json?limit=25&';
+const baseUrl = 'http://api.lib.harvard.edu/v2/items.json?limit=50&';
 
 
 module.exports = {

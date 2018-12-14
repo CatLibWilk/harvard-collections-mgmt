@@ -42,15 +42,25 @@ export default {
                     console.log(item)
                     console.log(`item.name is a ${typeof(item.name)}`)
                     console.log(item.name.length)
-                    if(item.name.length > 1) {
-                        console.log(item.name[0])
-                        if(typeof(item.name[0].namePart) == 'string'){
-                            newItem.author = item.name[0].namePart
-                        }else{
-                            newItem.author = item.name[0].namePart[0]
-                        }
+                    if(item.name.length == null){
+                        console.log('null found')
+                        console.log(typeof(item.name.namePart))
+                            console.log(typeof(item.name.namePart))
+                            newItem.author = item.name.namePart
+                        
                     }else{
-                        newItem.author = item.name.namePart[0];
+
+                        if(item.name.length > 1) {
+                            console.log(item.name[0])
+                            console.log('found to be greater than 1 in length')
+                            if(typeof(item.name[0].namePart) == 'string'){
+                                newItem.author = item.name[0].namePart
+                            }else{
+                                newItem.author = item.name[0].namePart[0]
+                            }
+                        }else{
+                            newItem.author = item.name.namePart[0];
+                        }
                     }
                     }
 
@@ -112,6 +122,10 @@ export default {
                         }
                             
                             newItem.pubDate = sort_date
+                    }
+                    console.log(typeof(newItem.author))
+                    if(typeof(newItem.author) == 'object'){
+                        newItem.author = newItem.author[0]
                     }
                     processedItems.push(newItem)
 
