@@ -38,6 +38,8 @@ class Home extends Component {
 
         // this.buildChart();
 
+        setTimeout(this.loadWelcome, 500)
+
         const section1 = new ScrollMagic.Scene({
             triggerElement: '#section-1'
         })
@@ -63,6 +65,11 @@ class Home extends Component {
           .addTo(this.controller);
         
     };
+
+    loadWelcome = () => {
+        const tar = document.getElementById('welcome');
+        tar.classList.add('loaded')
+    }
 
     handleInput = (e) => {
         switch (e.target.id) {
@@ -137,6 +144,10 @@ class Home extends Component {
             });
     };
     
+    closeWelcome = () => {
+        const tar = document.getElementById('welcome')
+        tar.classList.add('fade-out')
+    };
 
     handleClear = (e) => {
         e.preventDefault();
@@ -231,7 +242,22 @@ class Home extends Component {
         return(
             <div>
                 <Navbar id="home-nav"/>
+                    <div id="welcome" className="col-6 p-4">
+                        <span className="d-inline">
+                        <h1 className="float-left">Welcome To CloudManager+</h1>
+                        <div className="btn close-btn float-right" onClick={this.closeWelcome}>X</div>
+                        </span>
+                        <span className=".clearfix col-12">
+                        <p className="mt-5">Use the form below to make queries against the Harvard LibraryCloud API. Query responses include a total of items matching your query, a subset of item information including 
+                            Author/item title/publication date, and a set of basic data visualizations. Please note that due to API limitations, 
+                            only 250 item records can be returned, so while overall result numbers reflect the number of item records in the collection that match your query,
+                            searching with date limitations will reflect only a subset of items matching your query.  Also please note that the form must be cleared before each
+                            new query.  
+                        </p>
+                        </span>
+                    </div>
                 <MainContainer>
+
                     <div className="row">
                     <ScrollDiv id={"section-1"}>
                         <p>Welcome to Collection Management with LibraryCloud Item API</p>

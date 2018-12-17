@@ -1,10 +1,11 @@
-body {
-    /* min-height: 3000px */
-}
 
 a:hover {
     text-decoration: none;
     color: black
+}
+
+a {
+    color: black;
 }
 
 .jumbotron {
@@ -23,7 +24,33 @@ a:hover {
   align-items: center;
 }
 
+#welcome {
+    z-index: 1;
+    position: absolute;
+    left: 25%;
+    top: 35%;
+    background-color: #66B9BF;
+    
+    border-radius: 20px;
+    opacity: 0;
+    -webkit-transition:opacity .6s;
+        -moz-transition:opacity .6s;
+        -o-transition:opacity .6s;
+        transition:opacity .6s;
+}
 
+#welcome p {
+    font-size: 20px;
+    color: white;
+}
+
+#welcome h1 {
+    color:rgb(255, 218, 185);
+}
+
+.close-btn {
+    color:  rgb(255, 218, 185);
+}
 
 
 #sub-btn {
@@ -101,7 +128,17 @@ a:hover {
 }
 
 .fade-in {
-    opacity: 1;
+    opacity: 1!important;
     transform: translate(0,0)!important;
 }
 
+.fade-out {
+    opacity: 0!important;
+    display: none;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
