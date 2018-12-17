@@ -269,6 +269,7 @@ class Home extends Component {
                             searching with date limitations will reflect only a subset of items matching your query.  Also please note that the form must be cleared before each
                             new query.  
                         </p>
+                        <p><i>Boolean operations are also unfortunately not possible within the current API</i></p>
                         </span>
                     </div>
                 <MainContainer>

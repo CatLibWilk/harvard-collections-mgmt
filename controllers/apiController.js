@@ -7,8 +7,18 @@ module.exports = {
         console.log('getData function, api controller hit')
         console.log(req.body)
 
-        const queryTitle = req.body.title_input;
+        
+        let queryTitle = req.body.title_input;
+        const titleCheck = queryTitle.split(' ');
+        console.log(titleCheck)
         const queryName = req.body.author_input;
+
+        if(titleCheck.length > 1){
+            queryTitle = titleCheck.join('+')
+            console.log(queryTitle)
+        }else{
+            console.log('single word query')
+        }
         const querySubject = req.body.subject_input;
         const queryMedium = req.body.medium_input;
         
