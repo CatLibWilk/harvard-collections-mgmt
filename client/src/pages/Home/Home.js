@@ -4,6 +4,7 @@ import MainContainer from "../../components/MainContainer";
 import ScrollDiv from "../../components/ScrollDiv";
 import Form from "../../components/Form";
 import Button from "../../components/Button";
+import Preloader from "../../components/Preloader"
 
 import API from "../../utils/API";
 import Logic from "../../utils/Logic";
@@ -11,6 +12,7 @@ import Logic from "../../utils/Logic";
 import ScrollMagic from "scrollmagic";
 
 import Chart from "chart.js"
+
 
 import home_style from "./home-style.css";
 
@@ -94,11 +96,14 @@ class Home extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
 
+            this.loadPreloader();
             API.harvest(this.state)
             .then(returned => {
                 if(returned.data.message === "Please fill in atleast one query field."){
                     alert('Please fill in atleast one query field.')
+                    this.hidePreloader();
                 }else{
+                    
                     if(this.state.date_input){
                         console.log('dates search home.js')
                         Logic.dateSort(returned.data, this.state.date_input)
@@ -119,7 +124,7 @@ class Home extends Component {
                                             
                                             this.setState({returned_data: returnedData});
                                             this.scrollTo();
-
+                                            this.hidePreloader();
                                           })
                                     
                                 })
@@ -136,7 +141,7 @@ class Home extends Component {
                             this.setState({returned_data: returnedData})
                             this.buildChart();
                             this.scrollTo();
-                            
+                            this.hidePreloader();
                         });  
                     }
                     
@@ -144,6 +149,16 @@ class Home extends Component {
             });
     };
     
+    loadPreloader = () => {
+        const tar = document.getElementById('preloader')
+
+        tar.classList.add('preloader-fade')
+    }
+
+    hidePreloader = () => {
+        const tar = document.getElementById('preloader');
+        tar.classList.remove('preloader-fade')
+    }
     closeWelcome = () => {
         const tar = document.getElementById('welcome')
         tar.classList.add('fade-out')
@@ -257,7 +272,6 @@ class Home extends Component {
                         </span>
                     </div>
                 <MainContainer>
-
                     <div className="row">
                     <ScrollDiv id={"section-1"}>
                         <p>Welcome to Collection Management with LibraryCloud Item API</p>
@@ -268,6 +282,7 @@ class Home extends Component {
                     
                     <div className="row">
                     <ScrollDiv id={"section-2"}>
+                    <Preloader />
                         <Form function={this.handleInput}
                             field1_text={"Title Query"}
                                 field1_placeholder={"Introduction to Cataloging and Classification"}
@@ -317,7 +332,7 @@ class Home extends Component {
 
                         </ScrollDiv>
                         <ScrollDiv id={"section-4"}>
-                                <div id="wrapper">
+                                <div id="wrapper" className="pb-5">
                                     {this.state.chart_percentage > 0 ? <h1>Items matching your query make up {this.state.chart_percentage}% of the collection</h1> : <div></div>}
                                     <canvas id="myChart"></canvas>
                                 </div>

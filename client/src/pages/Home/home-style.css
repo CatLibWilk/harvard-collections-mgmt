@@ -77,10 +77,32 @@ a {
     color: light lightgrey;
 }
 #section-2 {
+    position: relative;
     background-color: rgb(255, 231, 210);
     padding-left: 10%;
     padding-right: 10%;
     transform: translate(0px, 100px);
+}
+
+#preloader {
+    position: absolute;
+    z-index: -1;
+    left: 25%;
+    right: 25%;
+    top: 35%;
+    transform:scale(1.5, 1.5);
+    opacity: 0;
+    -webkit-transform:opacity .6s;
+        -moz-transform:opacity .6s;
+        -o-transform:opacity .6s;
+    transition: .6s;
+
+}
+
+.preloader-fade {
+    opacity: 1!important;
+    transform: translate(0,0)!important;
+    z-index: 1!important;
 }
 
 #section-3 {
@@ -127,7 +149,7 @@ a {
     opacity: 0;
 }
 
-.fade-in {
+.fade-in{
     opacity: 1!important;
     transform: translate(0,0)!important;
 }
