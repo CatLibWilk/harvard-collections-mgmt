@@ -6,15 +6,21 @@ export default {
         const processedItems = [];
         let sort_date
         let retrievedTitle = ''
+        if(titlesArr.pagination.numFound === 0){
+            console.log('none found')
+        }
 
         const promise = new Promise(function(res, rej) {
             let items
             if(titlesArr.items){
-                 items = titlesArr.items.mods
+                items = titlesArr.items.mods
             }else{
-                 items = titlesArr
+                items = titlesArr
             }
-
+            
+        if(titlesArr.pagination.numFound > 1){
+            console.log(titlesArr.pagination.numFound)
+        
             items.forEach(item => {
                 const newItem = {
                     title: '',
@@ -129,7 +135,13 @@ export default {
                     }
                     processedItems.push(newItem)
 
-            })
+            })}else{
+                processedItems.push({
+                title: 'No items found',
+                author: '',
+                pubDate: '',
+                raw: ''})
+            }
             res(processedItems)
         })
         

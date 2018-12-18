@@ -106,6 +106,7 @@ class Home extends Component {
                     
                     if(this.state.date_input){
                         console.log('dates search home.js')
+                      
                         Logic.dateSort(returned.data, this.state.date_input)
                                 .then(returned => {
                                     console.log(returned)
@@ -113,7 +114,8 @@ class Home extends Component {
                                     returned.map(item => {
                                         passToFormat.push(item.data)
                                     })
-                                    console.log(passToFormat)
+                                    console.log(passToFormat)//
+
                                     Logic.getBasicBib(passToFormat)
                                           .then(returned => {
                                               console.log(returned)
@@ -125,14 +127,28 @@ class Home extends Component {
                                             this.setState({returned_data: returnedData});
                                             this.scrollTo();
                                             this.hidePreloader();
-                                          })
-                                    
+                                          }) 
+                                          //
                                 })
                     }else{
                         console.log('no date facet home.js')
                         Logic.getBasicBib(returned.data)
                         .then(response => {
                             console.log(response)
+                            if(response[0].title === 'No items found'){
+                                console.log(`no items found`)
+                                const failItem = {
+                                    count: '0',
+                                    items: [{
+                                        author: 'No items returned',
+                                        title: 'Please try a new search',
+                                        pubDate: 'after clearing the form.'
+                                    }]
+                                }
+                                this.setState({returned_data: failItem})
+                                this.scrollTo();
+                                this.hidePreloader();
+                            }else{
                             const returnedData = {
                                 count: returned.data.pagination.numFound,
                                 items: response
@@ -142,6 +158,7 @@ class Home extends Component {
                             this.buildChart();
                             this.scrollTo();
                             this.hidePreloader();
+                        }
                         });  
                     }
                     
