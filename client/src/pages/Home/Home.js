@@ -95,6 +95,9 @@ class Home extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+            if(!document.getElementById('welcome').classList.contains('fade-out')){
+                document.getElementById('welcome').classList.add('fade-out')
+            }
 
             this.loadPreloader();
             API.harvest(this.state)
