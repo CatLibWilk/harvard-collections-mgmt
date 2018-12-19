@@ -40,6 +40,9 @@ a {
         transition:opacity .6s;
 }
 
+
+
+
 #welcome p {
     font-size: 20px;
     color: white;
@@ -49,6 +52,25 @@ a {
     color:rgb(255, 218, 185);
 }
 
+#error {
+    z-index: 1;
+    position: absolute;
+    left: 25%;
+    top: 35%;
+    background-color: #66B9BF;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+    
+    border-radius: 20px;
+    opacity: 0;
+    -webkit-transition:opacity .6s;
+        -moz-transition:opacity .6s;
+        -o-transition:opacity .6s;
+        transition:opacity .6s;
+}
+
+#error h1 {
+    color: white;
+}
 .close-btn {
     border: solid;
     border-width: .5px;

@@ -1,4 +1,5 @@
 import { OutgoingMessage } from "http";
+import { isRegExp } from "util";
 
 export default {
     getBasicBib: function(titlesArr){
@@ -6,7 +7,8 @@ export default {
         const processedItems = [];
         let sort_date
         let retrievedTitle = ''
-        if(titlesArr.pagination.numFound === 0){
+        
+        if(!titlesArr.pagination || titlesArr.pagination.numFound === 0){
             console.log('none found')
         }
 
@@ -18,8 +20,8 @@ export default {
                 items = titlesArr
             }
             
-        if(titlesArr.pagination.numFound > 1){
-            console.log(titlesArr.pagination.numFound)
+        if(!titlesArr.pagination || titlesArr.pagination.numFound > 1){
+            // console.log(titlesArr.pagination.numFound)
         
             items.forEach(item => {
                 const newItem = {

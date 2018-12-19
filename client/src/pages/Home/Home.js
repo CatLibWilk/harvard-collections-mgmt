@@ -117,7 +117,7 @@ class Home extends Component {
                                     returned.map(item => {
                                         passToFormat.push(item.data)
                                     })
-                                    console.log(passToFormat)//
+                                    console.log(passToFormat)
 
                                     Logic.getBasicBib(passToFormat)
                                           .then(returned => {
@@ -169,21 +169,6 @@ class Home extends Component {
             });
     };
     
-    loadPreloader = () => {
-        const tar = document.getElementById('preloader')
-
-        tar.classList.add('preloader-fade')
-    }
-
-    hidePreloader = () => {
-        const tar = document.getElementById('preloader');
-        tar.classList.remove('preloader-fade')
-    }
-    closeWelcome = () => {
-        const tar = document.getElementById('welcome')
-        tar.classList.add('fade-out')
-    };
-
     handleClear = (e) => {
         e.preventDefault();
         const stateReset = {
@@ -212,9 +197,26 @@ class Home extends Component {
     };
 
     handleError = () => {
-        alert('no items found')
+        // alert('no items found')
+        this.hidePreloader();
+        document.getElementById('error').classList.add('fade-in')
         setTimeout(function(){window.location.reload()}, 3000)
     }
+    loadPreloader = () => {
+        const tar = document.getElementById('preloader')
+
+        tar.classList.add('preloader-fade')
+    }
+
+    hidePreloader = () => {
+        const tar = document.getElementById('preloader');
+        tar.classList.remove('preloader-fade')
+    }
+    closeWelcome = () => {
+        const tar = document.getElementById('welcome')
+        tar.classList.add('fade-out')
+    };
+
 
     buildChart = () => {
         if(document.getElementById('wrapper').classList.contains('hide')){
@@ -308,6 +310,12 @@ class Home extends Component {
                     
                     <div className="row">
                     <ScrollDiv id={"section-2"}>
+                    <div id="error" className="col-6 p-4">
+                        <span className="d-inline">
+                        <h1 className="float-left">No Items were returned from your search or there was an error.  The page will reload.</h1>
+                        </span>
+                        
+                    </div>
                     <Preloader />
                         <Form function={this.handleInput}
                             field1_text={"Title Query"}
@@ -348,7 +356,7 @@ class Home extends Component {
                                         console.log(item)
                                         return(
                                             (item.author ? <p>{`${item.author}, ${item.title}, ${item.pubDate}`}</p> :
-                                            <p>{`${item.title}, ${item.pubDate}`}</p>)
+                                            <p>(item.title === 'No Items found' ? '' : {`${item.title}, ${item.pubDate}`}</p>)
                                         )
                                         
                                     })}
