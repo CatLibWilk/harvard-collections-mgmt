@@ -104,6 +104,9 @@ class Home extends Component {
                     this.hidePreloader();
                 }else{
                     
+                    if(returned.data.items == null || returned.data.items.mods.length == null){
+                        this.handleError()
+                    }else{
                     if(this.state.date_input){
                         console.log('dates search home.js')
                         Logic.dateSort(returned.data, this.state.date_input)
@@ -144,7 +147,7 @@ class Home extends Component {
                             this.hidePreloader();
                         });  
                     }
-                    
+                }
                 };
             });
     };
@@ -190,6 +193,11 @@ class Home extends Component {
         
 
     };
+
+    handleError = () => {
+        alert('no items found')
+        setTimeout(function(){window.location.reload()}, 3000)
+    }
 
     buildChart = () => {
         if(document.getElementById('wrapper').classList.contains('hide')){
