@@ -31,14 +31,21 @@ class Home extends Component {
                 count: '',
                 items: []
             },
-            chart_percentage: 0
+            chart_percentage: 0,
+            chart_made: false,
+            first_load: 'true'
             
         }
     };
 
     componentDidMount(){
 
-        // this.buildChart();
+        if(localStorage.getItem('first_load')){
+            console.log('found sth in localstorage')
+            const loadState = localStorage.getItem('first_load')
+            console.log(`localstorage value is: ${loadState}`)
+            this.setLoadState(loadState)
+        }
 
         setTimeout(this.loadWelcome, 500)
 
@@ -68,9 +75,15 @@ class Home extends Component {
         
     };
 
+    setLoadState = (status) => {
+        this.setState({first_load: status})
+    }
+
     loadWelcome = () => {
         const tar = document.getElementById('welcome');
-        tar.classList.add('loaded')
+        if(tar){
+            tar.classList.add('loaded')
+        }
     }
 
     handleInput = (e) => {
@@ -95,8 +108,11 @@ class Home extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-            if(!document.getElementById('welcome').classList.contains('fade-out')){
-                document.getElementById('welcome').classList.add('fade-out')
+            if(document.getElementById('welcome')){
+
+                if(!document.getElementById('welcome').classList.contains('fade-out')){
+                    document.getElementById('welcome').classList.add('fade-out')
+                }
             }
 
             this.loadPreloader();
@@ -216,6 +232,7 @@ class Home extends Component {
         tar.classList.remove('preloader-fade')
     }
     closeWelcome = () => {
+        localStorage.setItem('first_load', 'false')
         const tar = document.getElementById('welcome')
         tar.classList.add('fade-out')
     };
@@ -241,7 +258,7 @@ class Home extends Component {
             perc = prePerc
         }
 
-        this.setState({chart_percentage: perc})
+        this.setState({chart_percentage: perc, chart_made: true})
 
 
         const ctx = document.getElementById('myChart').getContext('2d');
@@ -277,7 +294,7 @@ class Home extends Component {
 
     scrollTo = () => {
         const results = document.querySelector("#section-3").getBoundingClientRect();
-        console.log(results.y)
+
             window.scrollTo({top: (results.y + 750), behavior: 'smooth'})
 
     }
@@ -287,7 +304,8 @@ class Home extends Component {
         return(
             <div>
                 <Navbar id="home-nav"/>
-                    <div id="welcome" className="col-6 p-4">
+                    {console.log(this.state.first_load)}
+                    {this.state.first_load === 'true' ? <div id="welcome" className="col-6 p-4">
                         <span className="d-inline">
                         <h1 className="float-left">Welcome To CloudManager+</h1>
                         <div className="btn close-btn float-right" onClick={this.closeWelcome}>X</div>
@@ -301,7 +319,8 @@ class Home extends Component {
                         </p>
                         <p><i>Boolean operations are also unfortunately not possible within the current API</i></p>
                         </span>
-                    </div>
+                    </div> : ''}
+
                 <MainContainer>
                     <div className="row">
                     <ScrollDiv id={"section-1"}>
@@ -370,7 +389,7 @@ class Home extends Component {
                         </ScrollDiv>
                         <ScrollDiv id={"section-4"}>
                                 <div id="wrapper" className="pb-5">
-                                    {this.state.chart_percentage > 0 ? <h1>Items matching your query make up {this.state.chart_percentage}% of the collection</h1> : <div></div>}
+                                    {this.state.chart_percentage > 0 ? <h1>Items matching your query make up {this.state.chart_percentage}% of the collection</h1> : this.state.chart_made !== false ? <h1>Items matching you query represent less than .01% of the collection.</h1> : ''}
                                     <canvas id="myChart"></canvas>
                                 </div>
 

@@ -13,6 +13,7 @@ class Landing extends Component {
 
     componentDidMount(){
         setTimeout(this.loadJumbo, 1000);
+        localStorage.clear()
 
     };
 
