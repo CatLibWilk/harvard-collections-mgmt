@@ -378,7 +378,7 @@ class Home extends Component {
                                         console.log(item)
                                         return(
                                             (item.author ? <p>{`${item.author}, ${item.title}, ${item.pubDate}`}</p> :
-                                            <p>(item.title === 'No Items found' ? '' : {`${item.title}, ${item.pubDate}`}</p>)
+                                            item.title === 'No Items found' ? `` : <p>{`${item.title}, ${item.pubDate}`}</p>)
                                         )
                                         
                                     })}
