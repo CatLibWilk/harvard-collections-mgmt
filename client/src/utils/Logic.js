@@ -125,7 +125,13 @@ export default {
                             }
                         }else{
                            if(item.originInfo.dateCreated){
-                               sort_date = parseInt(item.originInfo.dateCreated[0]['#text'])
+                               try{
+
+                                   sort_date = parseInt(item.originInfo.dateCreated[0]['#text'])
+                               }
+                               catch(err){
+                                   console.log(err)
+                               }
                            }
                         }
                             
