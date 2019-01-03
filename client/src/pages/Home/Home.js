@@ -13,7 +13,6 @@ import ScrollMagic from "scrollmagic";
 
 import Chart from "chart.js"
 
-
 import home_style from "./home-style.css";
 
 class Home extends Component {

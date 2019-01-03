@@ -1,6 +1,9 @@
 {
   "name": "harvard-collections-mgmt",
   "version": "1.0.0",
+  "engines": {
+    "node": "8.11.1"
+  },
   "description": "React/Express collections management application that utilizes Harvard's LibraryCloud API services.",
   "main": "server.js",
   "scripts": {
