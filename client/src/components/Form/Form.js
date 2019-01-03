@@ -26,7 +26,7 @@ class Form extends Component{
                 <option value={''}>no medium specified</option>
                 
                 {this.props.dropdown_options.map(option => {
-                    return <option value={option.value}>{option.text}</option>
+                    return <option key={`${option.value}key`} value={option.value}>{option.text}</option>
                 })}
                
                 </select>
@@ -38,7 +38,7 @@ class Form extends Component{
                     <label htmlFor="exampleFormControlSelect2">{this.props.field4_text}</label>
                     <select multiple className="form-control" id={this.props.field4_id} onChange={this.props.function}>
                     {this.props.optionList_options.map(option => {
-                        return <option value={option.value}>{option.text}</option>
+                        return <option key={`${option.value}key`} value={option.value}>{option.text}</option>
                     })}
                     </select>
                 </div> : ''
